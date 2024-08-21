@@ -43,66 +43,69 @@ def CodigoMIO():
     #Calcular Voltaje
 
     print("Fin")
-import tkinter as tk
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg  # Import correcto
-import numpy as np
 
-def actualizar_grafico(resistenciasSerie, resistenciasParalelos):
-    plt.clf()
-    if resistenciasSerie:
-        plt.plot([0, 1], [1, 1], color='blue')  # Línea para resistencias en serie
-        for i in range(len(resistenciasSerie)):
-            plt.text(0.5 + i, 1, f"R{i+1}={resistenciasSerie[i]}", color='blue')
+def codigoGPT():
+    import tkinter as tk
+    import matplotlib.pyplot as plt
+    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg  # Import correcto
+    import numpy as np
 
-    if resistenciasParalelos:
-        plt.plot([0.5, 0.5], [0, 1], color='red')  # Ramas paralelas
-        for i in range(len(resistenciasParalelos)):
-            plt.text(0.5, 0.5 - i, f"Rp{i+1}={1/resistenciasParalelos[i]}", color='red')
+    def actualizar_grafico(resistenciasSerie, resistenciasParalelos):
+        plt.clf()
+        if resistenciasSerie:
+            plt.plot([0, 1], [1, 1], color='blue')  # Línea para resistencias en serie
+            for i in range(len(resistenciasSerie)):
+                plt.text(0.5 + i, 1, f"R{i+1}={resistenciasSerie[i]}", color='blue')
 
-    plt.draw()
+        if resistenciasParalelos:
+            plt.plot([0.5, 0.5], [0, 1], color='red')  # Ramas paralelas
+            for i in range(len(resistenciasParalelos)):
+                plt.text(0.5, 0.5 - i, f"Rp{i+1}={1/resistenciasParalelos[i]}", color='red')
 
-def agregar_resistencia():
-    tipo = tipo_resistencia.get()
-    valor = float(entry_resistencia.get())
-    
-    if tipo == 'serie':
-        resistenciasSerie.append(valor)
-    elif tipo == 'paralelo':
-        resistenciasParalelos.append(1/valor)
+        plt.draw()
+
+    def agregar_resistencia():
+        tipo = tipo_resistencia.get()
+        valor = float(entry_resistencia.get())
         
-    actualizar_grafico(resistenciasSerie, resistenciasParalelos)
+        if tipo == 'serie':
+            resistenciasSerie.append(valor)
+        elif tipo == 'paralelo':
+            resistenciasParalelos.append(1/valor)
+            
+        actualizar_grafico(resistenciasSerie, resistenciasParalelos)
 
-resistenciasSerie = []
-resistenciasParalelos = []
+    resistenciasSerie = []
+    resistenciasParalelos = []
 
-root = tk.Tk()
-root.title("Circuito Resistencia")
+    root = tk.Tk()
+    root.title("Circuito Resistencia")
 
-frame = tk.Frame(root)
-frame.pack()
+    frame = tk.Frame(root)
+    frame.pack()
 
-label_voltaje = tk.Label(frame, text="Voltaje:")
-label_voltaje.pack(side="left")
-entry_voltaje = tk.Entry(frame)
-entry_voltaje.pack(side="left")
+    label_voltaje = tk.Label(frame, text="Voltaje:")
+    label_voltaje.pack(side="left")
+    entry_voltaje = tk.Entry(frame)
+    entry_voltaje.pack(side="left")
 
-label_resistencia = tk.Label(frame, text="Resistencia:")
-label_resistencia.pack(side="left")
-entry_resistencia = tk.Entry(frame)
-entry_resistencia.pack(side="left")
+    label_resistencia = tk.Label(frame, text="Resistencia:")
+    label_resistencia.pack(side="left")
+    entry_resistencia = tk.Entry(frame)
+    entry_resistencia.pack(side="left")
 
-tipo_resistencia = tk.StringVar(value='serie')
-radio_serie = tk.Radiobutton(frame, text="Serie", variable=tipo_resistencia, value='serie')
-radio_paralelo = tk.Radiobutton(frame, text="Paralelo", variable=tipo_resistencia, value='paralelo')
-radio_serie.pack(side="left")
-radio_paralelo.pack(side="left")
+    tipo_resistencia = tk.StringVar(value='serie')
+    radio_serie = tk.Radiobutton(frame, text="Serie", variable=tipo_resistencia, value='serie')
+    radio_paralelo = tk.Radiobutton(frame, text="Paralelo", variable=tipo_resistencia, value='paralelo')
+    radio_serie.pack(side="left")
+    radio_paralelo.pack(side="left")
 
-boton_agregar = tk.Button(frame, text="Agregar Resistencia", command=agregar_resistencia)
-boton_agregar.pack(side="left")
+    boton_agregar = tk.Button(frame, text="Agregar Resistencia", command=agregar_resistencia)
+    boton_agregar.pack(side="left")
 
-fig, ax = plt.subplots()
-canvas = FigureCanvasTkAgg(fig, master=root)  # Uso correcto de FigureCanvasTkAgg
-canvas.get_tk_widget().pack()
+    fig, ax = plt.subplots()
+    canvas = FigureCanvasTkAgg(fig, master=root)  # Uso correcto de FigureCanvasTkAgg
+    canvas.get_tk_widget().pack()
 
-root.mainloop()
+    root.mainloop()
+CodigoMIO()
