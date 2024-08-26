@@ -1,11 +1,12 @@
 def CodigoMIO():
 
     print("Inicio")
-    resistencias = []
-    resistenciaSeriePara = []
+    
 
     while True:
         voltaje = int(input("Ingrese Voltaje: "))
+        resistencias = []
+        resistenciaSeriePara = []
         resistenciasSerie = []
         resistenciasParalelos = []
 
@@ -29,9 +30,8 @@ def CodigoMIO():
                     for j in range(cuantas):
                         resistencia = int(input(f"Resistencia Serie {j+1}: \n"))
                         resistenciaSeriePara.append(resistencia)
-                        RtSerieParalelo = 1/sum(resistenciaSeriePara)
-                        resistenciasParalelos.append(RtSerieParalelo)
-                        print(RtSerieParalelo)
+                        print(resistenciaSeriePara)
+                        
                 else:
                     resistencia = int(input(f"Resistencia {i+1}: \n"))
                     calculoResistenciaparalelo = 1/resistencia
@@ -44,7 +44,9 @@ def CodigoMIO():
 
         if len(resistenciasParalelos) == 1:
             print("Error, para ser paralelo deben haber 2 resistencias minimo")
-
+        
+        RtSerieParalelo = 1/sum(resistenciaSeriePara)
+        resistenciasParalelos.append(RtSerieParalelo)
         RpT = 1/sum(resistenciasParalelos)
         resistenciaTotal = sum(resistenciasSerie) + RpT
         print("Resistencia Total= ", resistenciaTotal)
