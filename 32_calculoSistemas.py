@@ -1,7 +1,8 @@
 def CodigoMIO():
 
     print("Inicio")
-    resistencias = {}
+    resistencias = []
+    resistenciaSeriePara = []
 
     while True:
         voltaje = int(input("Ingrese Voltaje: "))
@@ -11,7 +12,7 @@ def CodigoMIO():
         CantidadResistencias = int(input("Ingrese la cantidad de resistencias que se encuentran: "))
         for i in range(CantidadResistencias):
 
-            serieParalelo = input("Su resistencia es en serie o paralelo: ")
+            serieParalelo = input("Su circuito es en serie o paralelo: ")
 
             if serieParalelo == 'serie':
                 resistencia = int(input(f"Resistencia {i+1}: \n"))
@@ -19,10 +20,24 @@ def CodigoMIO():
                 resistencias[i] = resistencia
 
             elif serieParalelo == 'paralelo':
-                resistencia = int(input(f"Resistencia {i+1}: \n"))
-                calculoResistenciaparalelo = 1/resistencia
-                resistenciasParalelos.append(calculoResistenciaparalelo)
-                print("La resistencia total paralelo es", sum(resistenciasParalelos))
+                DentroParalelo = input("Su circuito paralelo tiene en serie? ")
+                
+                if DentroParalelo == 'si':
+                    print("Resistencia Serie en circuito Paralelo")
+                    cuantas = int(input("Cuantas Resistencias tiene? "))
+                    j = 0
+                    for j in range(cuantas):
+                        resistencia = int(input(f"Resistencia Serie {j+1}: \n"))
+                        resistenciaSeriePara.append(resistencia)
+                        RtSerieParalelo = 1/sum(resistenciaSeriePara)
+                        resistenciasParalelos.append(RtSerieParalelo)
+                        print(RtSerieParalelo)
+                else:
+                    resistencia = int(input(f"Resistencia {i+1}: \n"))
+                    calculoResistenciaparalelo = 1/resistencia
+                    resistenciasParalelos.append(calculoResistenciaparalelo)
+                    print("La resistencia total paralelo es", sum(resistenciasParalelos))
+                
             else:
                 print("mal ingresado")
                 exit()
