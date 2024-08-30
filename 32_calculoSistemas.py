@@ -18,7 +18,6 @@ def CodigoMIO():
             if serieParalelo == 'serie':
                 resistencia = int(input(f"Resistencia {i+1}: \n"))
                 resistenciasSerie.append(resistencia)
-                resistencias[i] = resistencia
 
             elif serieParalelo == 'paralelo':
                 DentroParalelo = input("Su circuito paralelo tiene en serie? ")
@@ -47,13 +46,15 @@ def CodigoMIO():
         
         RtSerieParalelo = 1/sum(resistenciaSeriePara)
         resistenciasParalelos.append(RtSerieParalelo)
-        RpT = 1/sum(resistenciasParalelos)
-        resistenciaTotal = sum(resistenciasSerie) + RpT
-        print("Resistencia Total= ", resistenciaTotal)
-
-        IntensidadTotal = voltaje / resistenciaTotal
+        #RpT = 1/sum(resistenciasParalelos)
+        resistenciaTotal = sum(resistenciasSerie) #+ RpT
+        #print("Resistencia Total= ", RpT)
+        RpT = resistenciasParalelos
+        print(RpT)
+        IntensidadTotal = voltaje / RpT
         print("Intensidad Total= ", IntensidadTotal)
         
+        print(sum(resistenciasSerie))
         print(resistencias)
 
     #Calcular Intensidad
