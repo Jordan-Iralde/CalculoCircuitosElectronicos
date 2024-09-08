@@ -4,20 +4,29 @@ def CodigoMIO():
     
 
     while True:
-        voltaje = int(input("Ingrese Voltaje: "))
+        voltaje = 24 #int(input("Ingrese Voltaje: "))
         resistencias = []
-        resistenciaSeriePara = []
-        resistenciasSerie = []
-        resistenciasParalelos = []
+        Rt = []
 
         CantidadResistencias = int(input("Ingrese la cantidad de resistencias que se encuentran: "))
         for i in range(CantidadResistencias):
-
+            rSerieEnParalelo = []
+            
+            resistenciasParalelos = []
+            
             serieParalelo = input("Su circuito es en serie o paralelo: ")
 
             if serieParalelo == 'serie':
-                resistencia = int(input(f"Resistencia {i+1}: \n"))
-                resistenciasSerie.append(resistencia)
+                cantidadSerie = int(input("Cuantas Resistencias tiene? "))
+                resistenciasSerie = []
+                for i in range(cantidadSerie):
+                    
+                    resistencia = int(input(f"Resistencia {i+1}: \n"))
+                    resistencias.append(resistencia)
+                    
+                    resistenciasSerie.append(resistencia)
+                    TotalRSERIE = sum(resistenciasSerie)
+                    Rt.append(TotalRSERIE)
 
             elif serieParalelo == 'paralelo':
                 DentroParalelo = input("Su circuito paralelo tiene en serie? ")
@@ -28,30 +37,45 @@ def CodigoMIO():
                     j = 0
                     for j in range(cuantas):
                         resistencia = int(input(f"Resistencia Serie {j+1}: \n"))
-                        resistenciaSeriePara.append(resistencia)
-                        print(resistenciaSeriePara)
+                        resistencias.append(resistencia)
                         
+                        rSerieEnParalelo.append(resistencia)
+                        print(rSerieEnParalelo)
+                    
+                    sum(rSerieEnParalelo)
+                    print(rSerieEnParalelo)
+                    
+                    rSerieEnParalelo = []
+                    print(rSerieEnParalelo)
+                    
+                    
                 else:
                     resistencia = int(input(f"Resistencia {i+1}: \n"))
+                    resistencias.append(resistencia)
+                    
                     calculoResistenciaparalelo = 1/resistencia
                     resistenciasParalelos.append(calculoResistenciaparalelo)
-                    print("La resistencia total paralelo es", sum(resistenciasParalelos))
+                    CalculoPrevioTotalParalelo = sum(calculoResistenciaparalelo)
+
+                    TotalDeEseParalelo = 1/CalculoPrevioTotalParalelo
+                    print("La resistencia total paralelo es", sum(TotalDeEseParalelo))
+                    
                 
             else:
                 print("mal ingresado")
-                exit()
+
 
         if len(resistenciasParalelos) == 1:
             print("Error, para ser paralelo deben haber 2 resistencias minimo")
         
-        RtSerieParalelo = 1/sum(resistenciaSeriePara)
-        resistenciasParalelos.append(RtSerieParalelo)
-        #RpT = 1/sum(resistenciasParalelos)
-        resistenciaTotal = sum(resistenciasSerie) #+ RpT
-        #print("Resistencia Total= ", RpT)
-        RpT = resistenciasParalelos
-        print(RpT)
-        IntensidadTotal = voltaje / RpT
+        ResistenciaT =  sum(Rt)
+        if rSerieEnParalelo == 0:
+            print()
+        else:
+            print()
+        
+        print("Resistencia Total = ", ResistenciaT)
+        IntensidadTotal = voltaje / ResistenciaT
         print("Intensidad Total= ", IntensidadTotal)
         
         print(sum(resistenciasSerie))
